@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit">
+	<title>TBI</title>
+	<script>
+		(function (win) {
+			var env = '<%= htmlWebpackPlugin.options.env %>'.replace(/"/g, '');
+			var config = {
+        env: env,
+        DomainName: '', // 域名
+        logoutUrl: '', // 退出时访问的地址
+        StaffImage: '', // 员工头像地址
+      }
+			switch (env) {
+				case 'production':
+          break
+        case 'test':
+					break
+				case 'development':
+        default:
+          config.DomainName = 'tbi-test.oa.com'
+          config.logoutUrl = '/_logout/?url=/'
+          config.StaffImage = 'http://dayu.oa.com/avatars/{0}/avatar.jpg'
+					break
+			}
+			win.config = config
+		})(window)
+	</script>
+</head>
+<body>
+  <div id="app"></div>
+  <%=htmlWebpackPlugin.files.webpackManifest%>
+	<!-- built files will be auto injected -->
+</body>
+</html>

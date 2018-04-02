@@ -1,0 +1,329 @@
+@themeColor: #4381ff;
+
+@doingColor: #acda77;
+
+@doneColor: #bdbdbd;
+
+@delayColor: #ff9d73;
+
+html, body{
+  height: 100%;
+}
+
+.mainColor {
+  color: #535b6e !important;
+}
+.doingColor {
+  color: @doingColor;
+}
+.doneColor {
+  color: @doneColor;
+}
+.delayColor {
+  color: @delayColor;
+}
+.doingBg {
+  background: @doingColor;
+}
+.doneBg {
+  background: @doneColor;
+}
+.delayBg {
+  background: @delayColor;
+}
+.bgc1 {
+  background-color: #fafafa;
+}
+.greenBg {
+  background: green;
+}
+.redBg {
+  background: red;
+}
+.yellowBg {
+  background: yellow;
+}
+.blackColor {
+  color: #000 !important;
+}
+.blue {
+  color: #4280fd !important;
+}
+.red {
+  color: #f24127 !important;
+}
+.redborder {
+  border-color: red !important;
+}
+.yellow {
+  color: #ffcc00 !important;
+}
+.gray {
+  color: #e3e3e3;
+}
+.at-name {
+  color: #4381ff;
+}
+.color000 {
+  color: #000 !important;
+}
+.color333 {
+  color: #333 !important;
+}
+.color666 {
+  color: #666 !important;
+}
+.color999 {
+  color: #999 !important;
+}
+.stateCell {
+  font-size: 12px;
+  width: 45px;
+  height: 20px;
+  text-align: center;
+  line-height: 19px;
+  border: 1px solid #6ab01b;
+  border-radius: 20px;
+  display: inline-block;
+  margin-right: 18px;
+}
+.doneCell {
+  border-color: @doneColor !important;
+  color: @doneColor;
+}
+.delayCell {
+  border-color: @delayColor !important;
+  color: @delayColor;
+}
+.doingCell {
+  border-color: @doingColor !important;
+  color: @doingColor;
+}
+.boder(@color:#eee) {
+  border: 1px @color solid;
+}
+.bdBom {
+  border-bottom: 1px solid #eee;
+}
+.bdReft {
+  border-right: 1px solid #eee;
+}
+.txtBold {
+  font-weight: bold;
+}
+.hide {
+  display: none !important;
+}
+.cursor {
+  cursor: pointer;
+}
+.defCursor {
+  cursor: default !important;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.midTxt {
+  display: inline-block;
+}
+.iconRight {
+  margin-right: 7px;
+}
+.transf9 {
+  transform: rotate(-90deg);
+}
+.transf0 {
+  transform: rotate(180deg);
+}
+.iconPadL {
+  padding-left: 22px;
+}
+.clear {
+  clear: both;
+  zoom: 1;
+  &:after {
+    content: ' ';
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+.width100 {
+  width: 100% !important;
+}
+.noData {
+  color: #999;
+  .clear;
+}
+.overflow {
+  overflow: hidden;
+}
+.txtOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  padding-right: 10px;
+}
+.opacity06 {
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
+}
+
+.chartIcon {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url(../images/chart-icon.png);
+  background-size: 32px;
+  background-repeat: no-repeat;
+  border: 1px solid #999;
+  background-color: #e0e0e0;
+}
+
+.barIcon {
+  background-position: -1px -33px;
+}
+
+/******************************** rewrite vhtml-ui style begin *********************************/
+
+.v-tip.v-tip--large {
+  padding: 3px;
+  ul {
+    > li {
+      font-size: 12px;
+      padding: 3px 5px;
+      cursor: pointer;
+      &:hover {
+        background: #999;
+        opacity: 0.6;
+      }
+    }
+  }
+}
+.v-message {
+  height: initial;
+}
+.v-input--default,
+.v-number-input {
+  height: 34px;
+  .v-input--default__input {
+    height: 29px;
+  }
+  .v-input--default__placeholder {
+    line-height: 29px;
+  }
+  .v-number-input--default__input {
+    height: 19px;
+  }
+}
+.v-button {
+  line-height: 32px;
+}
+.v-dialog {
+  .v-dialog__content {
+    padding: 20px 30px 30px;
+    .v-dialog__body--left {
+      .width100;
+    }
+  }
+}
+.v-select__popper {
+  .v-select-list__item {
+    font-size: 13px;
+  }
+}
+.v-panel {
+  .v-panel__content {
+    padding: 10px 0 40px;
+  }
+  .v-panel__body {
+    padding-top: 60px;
+  }
+}
+/******************************** rewrite vhtml-ui style end *********************************/
+
+/******************************** rewrite handsontable style begin *********************************/
+.baseTable {
+  position: relative;
+  width: 100%;
+  .icon-fanhui {
+    position: absolute;
+    padding: 6px;
+    right: 10px;
+    z-index: 20;
+    cursor: pointer;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    &:hover {
+      border-color: #bbb;
+    }
+  }
+  .noBorder {
+    .ht_clone_top .htCore th,
+    .htDimmed {
+      border-color: transparent;
+    }
+  }
+  .handsontable {
+    z-index: 1;
+    .htCore {
+      th {
+        background-color: transparent;
+      }
+      .htDimmed {
+        vertical-align: middle;
+      }
+    }
+  }
+  .v-pagination {
+    margin-top: 5px;
+  }
+  .emptyColumns>div{
+    &:after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      text-align: center;
+      height: 14px;
+      margin: auto;
+      content: '暂无数据';
+    }
+  }
+}
+/******************************** rewrite handsontable style end *********************************/
+// 无数据时的展示
+.no-data {
+  &:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    text-align: center;
+    height: 14px;
+    margin: auto;
+    content: '暂无数据';
+  }
+}
+/********date-icon***********/
+.v-date-picker__a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 13px;
+  height: 15px;
+  top: 5px;
+  right: 7px;
+  background: #fff url('../images/date_icon.png');
+}
