@@ -141,7 +141,7 @@ export default {
       ],
       shapeOptions: [{ text: '多边形', value: 'polygon' }, { text: '圆形', value: 'circle' }],
       currThemes: null,
-      isShow: true
+      isShow: false
     }
   },
   props: {
@@ -172,7 +172,7 @@ export default {
           break
         default:
           result = [
-            { value: 1, text: '默认' },
+            { value: 1, text: '复选' },
             { value: 2, text: '卡片' },
             { value: 5, text: '下拉框' },
             { value: 6, text: '单选按钮' },
@@ -196,10 +196,8 @@ export default {
     },
     styles: {
       handler(newObj, oldObj) {
-        this.isShow = newObj.mode !== 6
-        if (!this.isShow) {
-          this.styles.multiple = 0
-        }
+        let tempBool = newObj.mode === 2 || newObj.mode === 5
+        this.isShow = tempBool
         // 假如是换图例，不继续执行
         if (Object.keys(newObj).length !== Object.keys(oldObj).length) {
           return
@@ -262,6 +260,9 @@ export default {
     }
   },
   mounted() {
+    const { styles } = this
+    let tempBool = styles.mode === 2 || styles.mode === 5
+    this.isShow = tempBool
     this.stylesData = this.Utility.chartStyles(this.type)
     this.setCurrThemes(this.styles.themes || themes[this.themesIdx])
   }

@@ -55,8 +55,8 @@ export default {
       if (!gridlayout) {
         return
       }
-      console.log('查询参数')
-      console.log(argsArr)
+      // console.log('查询参数')
+      // console.log(argsArr)
       const _el = this.Utility.findComp(gridlayout, id)
       // 根据id获取全局过滤字段
       const argsObj = args[id] || []

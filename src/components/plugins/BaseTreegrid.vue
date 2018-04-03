@@ -1,7 +1,7 @@
 <template>
   <div :id="item.i" class="baseTreegrid" :class="{'noBorder': noBorder}" @click.stop="clickItem">
     <i class="iconfont icon-fanhui" :class="{'hide': !showBacktrack}" @click.stop="backtrackHandler" title="返回" />
-    <TreeGrid v-if="data" :ref="Utility.spliceKey('tg', item.i)" :i="item.i" :data="data" :getTreeData="getTreeData" :treegridObj="treegridObj" :linkColKeys="linkColKeys">
+    <TreeGrid v-if="data" :ref="Utility.spliceKey('tg', item.i)" :i="item.i" :data="data" :columns="columns" :getTreeData="getTreeData" :treegridObj="treegridObj" :linkColKeys="linkColKeys" @columnchange="onColumnChange">
     </TreeGrid>
   </div>
 </template>
@@ -61,6 +61,9 @@ export default {
       } else {
         this._baseTable_initData()
       }
+    },
+    onColumnChange() {
+      this.SET_TG_COLUMNS({id: this.item.i, data: this.columns})
     },
     clickItem() {
       this.$emit('select', this.item.i)
@@ -200,8 +203,9 @@ export default {
             let level = 1
             if (row._parentId) {
               const treeGridCmp = vm.$children[0]
-              level =
-                treeGridCmp && treeGridCmp.treegridEl && treeGridCmp.treegridEl.treegrid('getLevel', row._parentId)
+              level = treeGridCmp &&
+                treeGridCmp.treegridEl &&
+                treeGridCmp.treegridEl.treegrid('getLevel', row._parentId)
               level += 1
             }
             const width = this.boxWidth - level * 20
@@ -214,9 +218,7 @@ export default {
               const title = config.title || '弹出窗口'
               propVal = propVal !== '' && propVal.length > 1 ? propVal.substring(1) : ''
               const _id = item[columnKey] + '_' + row['__$ID']
-              str = `<a id="${_id}" href="javascript:;" class="blue click" data-title="${title}" data-params="${propVal}" data-url="${
-                config.url
-              }">
+              str = `<a id="${_id}" href="javascript:;" class="blue click" data-title="${title}" data-params="${propVal}" data-url="${config.url}">
                       ${value}
                     </a>`
             }
@@ -231,7 +233,8 @@ export default {
         this.treegridObj.treeField = tgColumns[0].field
       }
       if (params.colHeadSetting.length) {
-        params.colHeadSetting
+        const colSet = _.cloneDeep(params.colHeadSetting)
+        colSet
           .reduce((acc, curr) => {
             return acc.concat(curr)
           })
@@ -239,9 +242,9 @@ export default {
           .map(item => {
             return _.extend(item, tgColumns.find(it => item.field === it.field))
           })
-        this.SET_TG_COLUMNS({ id: this.item.i, data: params.colHeadSetting })
+        this.SET_TG_COLUMNS({ id: this.item.i, data: colSet })
       } else {
-        this.SET_TG_COLUMNS({ id: this.item.i, data: this.columns })
+        this.SET_TG_COLUMNS({id: this.item.i, data: this.columns})
       }
 
       // 获取数据

@@ -8,7 +8,7 @@
           <div class="seach-group" v-else-if="mode===5">
             <label for="">{{item.Description}}</label>
             <div class="control">
-              <v-select name="multi" :options="allFields" :multiple="multiple" @select="selectOption"></v-select>
+              <v-select name="multi" :multiple="multiple" :options="allFields" @select="selectOption"></v-select>
             </div>
           </div>
           <v-radio-group v-else-if="mode===6" :vertical="styles.horizontal" v-model="defaultRadioChecked" @change="selectRadio">
@@ -123,7 +123,7 @@ export default {
         multiple: styles.multiple, // 是否多选
         mode: styles.mode, // 显示模式
         value, // 当前值
-        eleIds: Object.keys(Object.values(high)[0])
+        eleIds: high ? Object.keys(Object.values(high)[0]) : []
       }
       return filterObj
     },
@@ -213,7 +213,7 @@ export default {
       for (const [gKey, gValue] of Object.entries(argsArr)) {
         const args = []
         if (Object.values(gValue).length > 1) {
-          console.log('处理多条件')
+          // console.log('处理多条件')
           // 处理多条件
           // console.log(gKey)
           // console.log(Object.values(gValue))
@@ -291,7 +291,7 @@ export default {
     },
     async _baseFilters_initFields() {
       const { item, global, Utility } = this
-      const { params, i, high = {} } = item
+      const { params, i, high = {} } = item // styles
       const { aliasKey, appName, blend = [] } = params
       const { fields = {} } = global
       this.blendData = _.cloneDeep(blend)
@@ -305,6 +305,9 @@ export default {
         if (data && data.length > 0) {
           const blendKey = blend[0][columnKey]
           const newData = []
+          // if (styles.mode === 5) {
+          //   newData.push({ value: '', text: '请选择' })
+          // }
           for (let i = 0; i < data.length; i++) {
             let field = data[i][blendKey]
             if (!newData.some(n => n.value === field)) {
@@ -319,6 +322,7 @@ export default {
               newData.push({ value: field, text: field })
             }
           }
+
           data = newData
         }
       }

@@ -1,6 +1,6 @@
 <template>
   <div :id="item.i" class="baseTable" @click.stop="clickItem">
-    <button type="button" class="export-table" @click="onExport">导出</button>
+    <!-- <button type="button" class="export-table" @click="onExport">导出</button> -->
     <i class="iconfont icon-fanhui" :class="{'hide': !showBacktrack}" @click.stop="backtrackHandler" title="返回" />
     <hot-table :root="Utility.spliceKey('hst', item.i)" :ref="Utility.spliceKey('hst', item.i)" :class="{'noBorder': noBorder}" :settings="hotSettings" :readOnly="true" :rowHeaders="rowHeaders" />
     <v-pagination v-if="showPage" @change="onChange" :total="source.length" />
@@ -245,8 +245,8 @@ export default {
       var vm = this
       const tHeader = vm.hotSettings.colHeaders // 获取列标题名
       const tData = vm.hotSettings.data // 列表数据集合
-      console.log(tHeader)
-      console.log(tData)
+      // console.log(tHeader)
+      // console.log(tData)
       this.Utility.exportToExcel(tHeader, tData, this.item.title)
     }
   },

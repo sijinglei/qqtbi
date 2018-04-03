@@ -1,9 +1,8 @@
 /* eslint-disable */
 require('script-loader!file-saver')
 require('./Blob')
-// xlsx核心
-require('script-loader!xlsx/dist/xlsx.core.min')
-
+// require('script-loader!xlsx/dist/xlsx.core.min');
+if (typeof require !== 'undefined') var XLSX = require('xlsx')
 function generateArray(table) {
   var out = []
   var rows = table.querySelectorAll('tr')
@@ -120,7 +119,6 @@ export function export_table_to_excel(id) {
 function formatJson(jsonData) {
   console.log(jsonData)
 }
-
 export function export_json_to_excel(th, jsonData, defaultTitle) {
   /* original data */
 

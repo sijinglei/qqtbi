@@ -15,7 +15,7 @@ export default {
       treegrid: null
     }
   },
-  props: ['data', 'treegridObj', 'getTreeData', 'linkColKeys', 'i'],
+  props: ['data', 'treegridObj', 'getTreeData', 'linkColKeys', 'i', 'columns'],
   computed: {
     ...mapState(['tgColsObj'])
   },
@@ -60,7 +60,7 @@ export default {
           })
           .filter(item => item && item.field)
         // formatter width 拷贝到新值去
-        const cloneColumns = _.cloneDeep(newV)
+        let cloneColumns = _.cloneDeep(newV)
         cloneColumns.forEach(item => {
           item.map(it => {
             const tmp = tgInsFields.find(item => item.field === it.field)
@@ -71,9 +71,14 @@ export default {
             return it
           })
         })
+        if (!_.isEqual(tgInsFields.map(item => item.field), this.columns[0].map(item => item.field))) {
+          this.$emit('columnchange')
+          cloneColumns = this.columns
+        }
         treegridEl.treegrid({
           columns: cloneColumns,
-          treeField: this.treegridObj.treeField
+          treeField: this.treegridObj.treeField,
+          data: _.cloneDeep(this.data)
         })
       }
     }
